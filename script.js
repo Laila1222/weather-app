@@ -79,7 +79,6 @@ function showPosition (position) {
 //Get weather data
 function getWeatherData (url) {
   fetch (url)
-    // .then (checkFetch)
     .then (response => response.json ())
     .then (json => {
       if (!json.message) {
@@ -96,10 +95,10 @@ function getWeatherData (url) {
         ).innerHTML = `Humidity: ${json.main.humidity}%`;
         document.querySelector (
           '#min-temp'
-        ).innerHTML = `Minimum-temperature: ${json.main.temp_min} °C.`;
+        ).innerHTML = `Min. temperature: ${json.main.temp_min} °C.`;
         document.querySelector (
           '#max-temp'
-        ).innerHTML = `Maximum-temperature: ${json.main.temp_max} °C.`;
+        ).innerHTML = `Max. temperature: ${json.main.temp_max} °C.`;
         document.querySelector (
           '#wind-speed'
         ).innerHTML = `Wind speed: ${json.wind.speed} Km/h`;
@@ -112,6 +111,7 @@ function getWeatherData (url) {
         document.querySelector (
           '#sunset'
         ).innerHTML = `Sunset: ${convertUnixTime (json.sys.sunset)} pm`;
+        document.querySelector('.data-container').style.display = "block";
 
         // Convert unix time stamp into minutes and hours
         function convertUnixTime (unix) {
@@ -147,13 +147,6 @@ function getWeatherData (url) {
     });
 }
 
-//Check if fetch works
-// const checkFetch = function (response) {
-//   if (!response.ok) {
-//     console.log (response.statusText + ' - ' + response.url);
-//   }
-//   return response.json ();
-// };
 
 //Load location on  map
 function initMap (coordLat, coordLng) {
